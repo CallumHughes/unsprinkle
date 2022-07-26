@@ -1,11 +1,29 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
 
 const Hero = () => {
+  const heroImageSrc = "/images/hero-img.jpg";
   return (
     <Wrapper>
-      <HeroImage src="/images/hero-img.jpg" />
-      <Swoop src="/swoop.svg" />
+      <picture>
+        <source
+          type="image/avif"
+          srcSet={`${heroImageSrc.replace(".jpg", ".avif")} 1x, 
+          ${heroImageSrc.replace(".jpg", "@2x.avif")} 2x, 
+          ${heroImageSrc.replace(".jpg", "@3x.avif")} 3x`}
+        />
+        <source
+          type="image/jpeg"
+          srcSet={`${heroImageSrc} 1x, 
+          ${heroImageSrc.replace(".jpg", "@2x.jpg")} 2x, 
+          ${heroImageSrc.replace(".jpg", "@3x.jpg")} 3x`}
+        />
+        <HeroImage
+          alt="example image of striking cat staring back with large blue eyes amongst a black background"
+          src={heroImageSrc}
+        />
+      </picture>
+      <Swoop alt="" src="/swoop.svg" />
     </Wrapper>
   );
 };
@@ -25,6 +43,7 @@ const HeroImage = styled.img`
   width: 500px;
   height: 500px;
   max-height: 100%;
+  object-fit: cover;
 `;
 
 const Swoop = styled.img`
